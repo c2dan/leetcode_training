@@ -1,7 +1,7 @@
 
 # day2 | 977. Squares of a Sorted Array,
 
-##[977.  Squares of a Sorted Array](https://leetcode.com/problems/squares-of-a-sorted-array/)
+## [977.  Squares of a Sorted Array](https://leetcode.com/problems/squares-of-a-sorted-array/)
 This array is ascending and  some part of it may smaller than 0. we can use 2 pointer to comparing the sqaure of the negative number and the square of the positive number. 
 
 ```python3
@@ -44,3 +44,15 @@ class Solution:
         return nums
  ```
  this function cant work on [-5,-3,-2,-1], cause it will change the ascending order when switch some of them.
+
+
+ ## [209.  Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
+
+this is an advance problem
+ 
+...not finish yet
+
+
+## [59.  Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)
+
+not dificult but test the edge condition
