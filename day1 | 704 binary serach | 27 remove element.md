@@ -51,8 +51,8 @@ class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
         fp = 0 #fast pointer
         sp = 0 #slow pointer
-        length = len(nums) - 1
-        while fp <= length - 1:
+        length = len(nums)
+        while fp < length:
             if nums[fp] != val:
                 nums[sp] = nums[fp]
                 sp+=1
