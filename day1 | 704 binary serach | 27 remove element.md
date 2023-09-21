@@ -27,6 +27,7 @@ class Solution:
 ```
 update
 [solution from bilibili](https://www.bilibili.com/video/BV1fA4y1o715/?vd_source=1116eeca3dc2f3ea8dc1046e123a33cd)
+
 ```python3
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -44,6 +45,7 @@ class Solution:
 review:**unique and ordered is the key point**
 
 #27.  [Remove Element](https://leetcode.com/problems/remove-element/)
+
 This problem requires removing a specific value from the list and updating the list in place. It doesn't concern itself with the length of the list. Initially, I think we can employ two pointers – a fast pointer to search for unmatched numbers and replace them in the space of the slow pointer.
 solution:
 ```python3
