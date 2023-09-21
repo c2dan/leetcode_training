@@ -3,7 +3,7 @@ resources
 ```python
 print{"iloveu"}
 ```
-# 704. Binary Search
+# 704. [Binary Search](https://leetcode.com/problems/binary-search/submissions/)
 
 This problem is finding a number in a list that is in ascending order. In my opinion, the best way to do is using binary search.
 
