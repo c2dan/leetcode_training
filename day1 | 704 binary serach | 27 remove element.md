@@ -1,4 +1,4 @@
-#day1 | 704 binary serach | 27 remove element.md
+# day1 | 704 binary serach | 27 remove element.md
 
 ```python
 print{"iloveu"}
@@ -44,7 +44,7 @@ class Solution:
 ```
 review:**unique and ordered is the key point**
 
-# 27.  [Remove Element](https://leetcode.com/problems/remove-element/)
+# 27. [Remove Element](https://leetcode.com/problems/remove-element/)
 
 This problem requires removing a specific value from the list and updating the list in place. It doesn't concern itself with the length of the list. Initially, I think we can employ two pointers – a fast pointer to search for unmatched numbers and replace them in the space of the slow pointer.
 solution:
