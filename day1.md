@@ -26,7 +26,8 @@ class Solution:
         return -1
 ```
 update
-```
+[solution from bilibili](https://www.bilibili.com/video/BV1fA4y1o715/?vd_source=1116eeca3dc2f3ea8dc1046e123a33cd)
+```python3
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         left,right = 0, len(nums) - 1
