@@ -55,4 +55,4 @@ this is an advance problem
 
 ## [59.  Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)
 
-not dificult but test the edge condition
+it it not dificult but testing the condideration of edge condition 
