@@ -1,1 +1,79 @@
+#day3 | 203. Remove Linked List Elements | 707. design linked list ｜ 206. Reverse Linked List
 
+# [203.  Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/)
+```python3
+ Definition for singly-linked list.
+ class ListNode:
+     def __init__(self, val=0, next=None):
+         self.val = val
+         self.next = next
+
+class Solution:
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        dummy = ListNode(next = head)
+        cur = dummy
+        while cur.next:
+            if cur.next.val == val:
+                cur.next = cur.next.next
+            else:
+                cur = cur.next
+        return dummy.next
+```
+in this problem, I use dummy Node to reduce complexity.
+
+# [707.  Design Linked List](https://leetcode.com/problems/design-linked-list/)
+In order to get familiar with linked lists in Python 3.
+
+```python3
+class ListNode:
+    def __init__(self, val: int, next = None):
+        self.val = val
+        self.next = next
+
+class MyLinkedList:
+
+    def __init__(self):
+        self.dummy = ListNode(0)
+        self.size = 0
+
+    def get(self, index: int) -> int:
+        if index < 0 or index >= self.size:
+            return -1
+        cur = self.dummy.next
+        for i in range(index):
+            cur = cur.next
+        return cur.val
+
+    def addAtHead(self, val: int) -> None:
+        self.dummy.next = ListNode(val, self.dummy.next)
+        self.size+=1
+
+    def addAtTail(self, val: int) -> None:
+        cur = self.dummy
+        while cur.next:
+            cur = cur.next
+        cur.next = ListNode(val)
+        self.size+=1
+
+    def addAtIndex(self, index: int, val: int) -> None:
+        if index < 0 or index > self.size:
+            return
+        cur = self.dummy
+        for i in range(index):
+            cur = cur.next
+        cur.next = ListNode(val, cur.next)
+        self.size+=1
+
+    def deleteAtIndex(self, index: int) -> None:
+        if index < 0 or index >= self.size:
+            return
+        cur = self.dummy
+        for i in range(index):
+            cur = cur.next
+        cur.next = cur.next.next
+        self.size-=1
+```
+
+The most challenging part is defining the ListNode class because I am not familiar with writing Python
+
+# [206.  Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
