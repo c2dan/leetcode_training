@@ -56,3 +56,41 @@ this is an advance problem
 ## [59.  Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)
 
 it it not dificult but testing the condideration of edge condition 
+```python3
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        cur_col, cur_row = 0, 0
+        matrix = [[0] * n for _ in range(n)]
+        count = 1
+
+        while n > 0:
+            if n > 1:
+                # 从左到右
+                for i in range(cur_col, cur_col + n - 1):
+                    matrix[cur_row][i] = count
+                    count += 1
+
+                # 从上到下
+                for i in range(cur_row, cur_row + n - 1):
+                    matrix[i][cur_col + n - 1] = count
+                    count += 1
+
+                # 从右到左
+                for i in range(cur_col + n - 1, cur_col, -1):
+                    matrix[cur_row + n - 1][i] = count
+                    count += 1
+
+                # 从下到上
+                for i in range(cur_row + n - 1, cur_row, -1):
+                    matrix[i][cur_col] = count
+                    count += 1
+
+            # 如果矩阵大小为奇数，填充中心元素
+            if n == 1:
+                matrix[cur_row][cur_col] = count
+            cur_row+=1
+            cur_col+=1
+            n -= 2
+
+        return matrix
+```
