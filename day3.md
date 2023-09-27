@@ -1,4 +1,4 @@
-#day3 | 203. Remove Linked List Elements | 707. design linked list ｜ 206. Reverse Linked List
+#day3 | 203. Remove Linked List Elements | 707. design linked list | 206.  Reverse Linked List
 
 # [203.  Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/)
 ```python3
@@ -74,6 +74,25 @@ class MyLinkedList:
         self.size-=1
 ```
 
-The most challenging part is defining the ListNode class because I am not familiar with writing Python
+the most hardest part is define ListNode, because I am not familar to write python
 
 # [206.  Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
+```python3
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        cur = head
+        pre = None
+        while cur:
+            tem = cur.next
+            cur.next = pre
+            pre = cur
+            cur = tem
+        return pre
+```
+conclusion: learn ListNode in python3
+
