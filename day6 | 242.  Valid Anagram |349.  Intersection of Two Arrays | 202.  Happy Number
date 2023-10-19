@@ -1,0 +1,70 @@
+#day6 | 242.  Valid Anagram |349.  Intersection of Two Arrays | 202.  Happy Number
+# [242.  Valid Anagram](https://leetcode.com/problems/valid-anagram/)
+this problem checks whether it is an anagram
+```python3
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        record = [0] * 26
+        for i in s:
+            record[ord(i) - ord("a")] += 1
+        for i in t:
+            record[ord(i) - ord("a")] -= 1
+        for i in range(26):
+            if record[i] != 0:
+                return False
+        return True
+   ```
+
+
+# [349.  Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/)
+
+
+this problem is about hashset and list
+```python3
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        table = set()
+        for i in nums1:
+            table.add(i)
+        res = set()
+        for i in nums2:
+            if i in table:
+                res.add(i)
+        return res
+```
+        
+
+# [202.  Happy Number](https://leetcode.com/problems/happy-number/)
+
+
+```python3
+
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        table = set()
+        if n <= 0 :
+            return False
+        while True:
+            if n in table:
+                return False
+            else:
+                table.add(n)
+            if n == 1:
+                return True
+            string = str(n)
+            n = 0
+            for i in string:
+                n += int(i)**2
+```
+
+# [1.  Two Sum](https://leetcode.com/problems/two-sum/)
+```python3
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        table = dict( )
+        for index, value in enumerate(nums):
+            if target - value in table:
+                return [index, table[target - value]] 
+            table[value] = index
+        return []
+ ```
