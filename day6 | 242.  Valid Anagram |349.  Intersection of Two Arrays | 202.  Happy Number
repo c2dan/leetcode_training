@@ -68,3 +68,4 @@ class Solution:
             table[value] = index
         return []
  ```
+in this topic, i think I should more considering some words like only, once, singular.. which something only used once.
