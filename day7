@@ -1,0 +1,26 @@
+# day7
+
+# [454.  4Sum II](https://leetcode.com/problems/4sum-ii/)
+
+
+没看懂啊
+
+# [383.  Ransom Note](https://leetcode.com/problems/ransom-note/)
+
+in this problem, it tests coder on it familiarity with dictionaries. If the index has not been initialized, the coder should assign a value first.
+```python3
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        mgz = {}
+        for i in magazine:
+            if i in mgz:
+                mgz[i] += 1
+            else:
+                mgz[i] = 1
+        for i in ransomNote:
+            if i not in mgz or mgz[i] <= 0:
+                return False
+            else:
+                mgz[i]-=1
+        return True
+ ```
