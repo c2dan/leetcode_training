@@ -1,0 +1,79 @@
+# day8 344.  Reverse String｜541.  Reverse String II｜151.  Reverse Words in a String
+
+# [344.  Reverse String](https://leetcode.com/problems/reverse-string/)
+reverse string by two pointer
+```python3
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        right = len(s) - 1
+        left = 0
+        while right > left:
+            tem = s[left]
+            s[left] = s[right]
+            s[right] = tem
+            right-=1
+            left+=1
+```
+
+# [541.  Reverse String II](https://leetcode.com/problems/reverse-string-ii/)
+这个题目需要部分翻转，那只需要部分截取然后翻转再丢回去。
+```python3
+为什么这样不行：错误的使用了包，说明我对包的使用不熟悉，需要复习
+class Solution:
+    def reverseString(self, s: List[str]) -> List[str]:
+        right = len(s) - 1
+        left = 0
+        while right > left:
+            tem = s[left]
+            s[left] = s[right]
+            s[right] = tem
+            right-=1
+            left+=1
+        return s
+    def reverseStr(self, s: str, k: int) -> str:
+        p = 0
+        end = len(s) - 1
+        while p <= end:
+            if end - p >= k:
+                s[p:p + k - 1] = reverseString(s[p:p + k - 1])
+                continue
+            else:
+                s[p:end] = reverseString(s[p:end])
+            p += 2*k
+上面的是错误代码
+
+正确的如下：
+class Solution:
+    def reverseString(self, s):
+        right = len(s) - 1
+        left = 0
+        while right > left:
+            tem = s[left]
+            s[left] = s[right]
+            s[right] = tem
+            right-=1
+            left+=1
+        return s
+    def reverseStr(self, s: str, k: int) -> str:
+        p = 0
+        end = len(s) - 1
+        s = list(s)
+        while p <= end:
+            if end - p >= k:
+                s[p:p + k] = self.reverseString(s[p:p + k])
+            else:
+                s[p:] = self.reverseString(s[p:])
+            p += 2*k
+        return ''.join(s)
+
+```
+# [151.  Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)
+i wanna use hashmap to store all the words by its number, then switch it.
+but if no more space required, 
+```python3
+
+```
+
