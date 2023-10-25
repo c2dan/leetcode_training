@@ -1,0 +1,177 @@
+# day7 | 454.  4Sum II | 383.  Ransom Note | 15.  3Sum | 18.  4Sum 
+
+# [454.  4Sum II](https://leetcode.com/problems/4sum-ii/)
+```python3
+class Solution:
+    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+        # 排列组合
+        # use two for loop to traverse n1 n2 and n3 n4 sepectively.
+
+        map1 = {}
+        result = 0
+        for i in nums1:
+            for j in nums2:
+                if i + j not in map1:
+                    map1[i + j] = 1
+                else:
+                    map1[i + j] += 1
+
+
+        for i in nums3:
+            for j in nums4:
+                if - (i + j) in map1 and map1[-(i + j)] != 0:
+                    result += map1[-(i + j)]
+        return result
+  ```
+分成两部分，前两个list可以做一个hashmap，两个for loop遍历所有数可出现的相加之和情况，然后index对应出现的数，value对应出现的次数。后面两个list通过同样的方式遍历，通过查找相加之和的负数是否存在于map里，存在的话，就意味着存在相加为0
+的情况。然后讲对应index的value加入到result里面。
+
+# [383.  Ransom Note](https://leetcode.com/problems/ransom-note/)
+
+in this problem, it tests coder on it familiarity with dictionaries. If the index has not been initialized, the coder should assign a value first.
+```python3
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        mgz = {}
+        for i in magazine:
+            if i in mgz:
+                mgz[i] += 1
+            else:
+                mgz[i] = 1
+        for i in ransomNote:
+            if i not in mgz or mgz[i] <= 0:
+                return False
+            else:
+                mgz[i]-=1
+        return True
+ ```
+
+# [15.  3Sum](https://leetcode.com/problems/3sum/)
+
+如果是我自己想的话，我会使用最暴力的解法，但这并不是空间最优的解法。最优解法是排序之后做双指针。注意：这道题的输出结果顺序并不影响结果。
+
+**这是错误的代码**
+错误的地方是：
+1.  在第三个 `if` 语句中，如果 `nums[left] + nums[right] + nums[i] == 0`，你会将结果添加到 `res`，然后将 `left` 向前移动一步。这可能导致遗漏其他可能的三数之和组合。通常，你应该将 `right` 向后移动一步，并继续查找其他组合。
+    
+2.  考虑对排序后的 `nums` 进行循环，避免遍历相同的元素多次。你可以使用一个 `while` 循环，同时考虑向前移动 `left` 和向后移动 `right` 的情况。
+```python3
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # bubble sort
+        n = len(nums)
+        for i in range(0, n):
+            # for switch the largest number to the end
+            for j in range(0, n - i - 1):
+                if nums[j] > nums[j + 1]:
+                    tem = nums[j]
+                    nums[j] = nums[j + 1]
+                    nums[j + 1] = tem
+        
+        # 3 sum
+        res = []
+        for i in range(0, n):
+            left = i
+            right = n - 1
+            while (left != right):
+                if nums[left] + nums[right] + nums[i] < 0:
+                    left+=1
+                if nums[left] + nums[right] + nums[i] > 0:
+                    right-=1
+                if nums[left] + nums[right] + nums[i] == 0:
+                    res.append([nums[left],nums[right],nums[i]])
+                    left+=1
+                
+        return res
+```
+正确答案
+```python3
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # bubble sort
+        n = len(nums)
+        for i in range(0, n):
+            # for switch the largest number to the end
+            for j in range(0, n - i - 1):
+                if nums[j] > nums[j + 1]:
+                    tem = nums[j]
+                    nums[j] = nums[j + 1]
+                    nums[j + 1] = tem
+
+        # 3 sum
+        res = []
+        for i in range(0, n):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue  # 跳过重复的元素
+            left = i + 1 # start from i + 1
+            right = n - 1
+            while (left < right):
+                total = nums[left] + nums[right] + nums[i]
+                if total < 0:
+                    left += 1
+                if total > 0:
+                    right -= 1
+                if total == 0:
+                    res.append([nums[left],nums[right],nums[i]])
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+                    left += 1
+                    right -= 1
+                
+        return res
+
+```
+
+# [18.  4Sum](https://leetcode.com/problems/4sum/)
+
+四数之和的原理和三数之和一样，只不过在外面套了一层壳
+
+```python3
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        # bubble sort
+        n = len(nums)
+        for i in range(0, n):
+            # for switch the largest number to the end
+            for j in range(0, n - i - 1):
+                if nums[j] > nums[j + 1]:
+                    tem = nums[j]
+                    nums[j] = nums[j + 1]
+                    nums[j + 1] = tem
+
+        # 4 sum
+        res = []
+        for i in range(0, n):
+            # 剪枝
+            if i > 0 and nums[i] > target and target > 0:
+                break
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue  # 跳过重复的元素
+            for j in range(i + 1, n):
+                if j > 0 and nums[j] + nums[i] > target and target > 0:
+                    break
+                if j > i + 1 and nums[j] == nums[j - 1]:
+                    continue
+                left = j + 1 # start from j + 1
+                right = n - 1
+                while (left < right):
+                    total = nums[left] + nums[right] + nums[i] + nums[j]
+                    if total < target:
+                        left += 1
+                    if total > target:
+                        right -= 1
+                    if total == target:
+                        res.append([nums[left],nums[right],nums[i],nums[j]])
+                        while left < right and nums[left] == nums[left + 1]:
+                            left += 1
+                        while left < right and nums[right] == nums[right - 1]:
+                            right -= 1
+                        left += 1
+                        right -= 1
+                
+        return res
+``` 
+
+值得注意的是，这里使用了剪枝。四数之和的target可以是负数，所以判断的时候需要考虑到负数的情况。
