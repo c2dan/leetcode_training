@@ -71,9 +71,18 @@ class Solution:
 
 ```
 # [151.  Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)
-i wanna use hashmap to store all the words by its number, then switch it.
-but if no more space required, 
-```python3
 
+# 贼难，学明白怎么使用strip和split
+i wanna use hashmap to store all the words by its number, then switch it.
+but if no more space required.
+```python3
+class Solution:
+    def reverseWords(self, s: str) -> str:
+	    # delete extra spaces
+        words = s.strip()
+        words = words[::-1]
+        res = ' '.join(word[::-1] for word in words.split())
+        return res
 ```
+
 
