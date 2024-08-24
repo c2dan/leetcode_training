@@ -47,7 +47,7 @@ class Solution:
 
 
  ## [209.  Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
-
+cpp solution, the most tricky thing is the while part, using sliding window for update length, but still O(n).
 ```cpp
 class Solution {
 public:
