@@ -48,8 +48,26 @@ class Solution:
 
  ## [209.  Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
 
-this is an advance problem
- 
+```cpp
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        // slide window
+        int left = 0;
+        int count = 0;
+        int length = 99999999;
+        for (int right = 0;right<nums.size() ; right++) {
+            count+=nums[right];
+            while(count >= target) {
+                length = length < right - left + 1 ? length: right-left +1;
+                count-=nums[left++];
+            }
+        }
+        return length == 99999999 ? 0 : length;
+    }
+};
+
+```
 ...not finish yet
 
 
