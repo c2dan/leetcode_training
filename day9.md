@@ -55,6 +55,6 @@ Stack（栈）：
 队列queue，先进先出
 stack。先进后出
 232. 用栈实现队列
-
+# [232. 用栈实现队列]([https://leetcode.com/problems/reverse-string/](https://leetcode.cn/problems/implement-queue-using-stacks/description/))
 
 **KMP算法**
