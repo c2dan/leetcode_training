@@ -1,4 +1,4 @@
-# day9
+# day10 232. 用栈实现队列 |
 堆（Heap）和栈（Stack）是计算机内存管理中的两种常见区域，它们的使用方式和管理机制有所不同：
 
 1. 栈（Stack）
@@ -46,6 +46,7 @@ void function() {
 
 Queue：队列
 Stack：栈
+
 详细解释：
 Queue（队列）：
 队列是一种**先进先出（FIFO, First In First Out）**的数据结构，意味着第一个进入队列的元素最先被处理。它就像排队一样，排在前面的人最先服务，后面的人依次服务。
@@ -60,5 +61,143 @@ Stack（栈）：
 stack。先进后出
 232. 用栈实现队列
 # [232. 用栈实现队列]([https://leetcode.com/problems/reverse-string/](https://leetcode.cn/problems/implement-queue-using-stacks/description/))
+
+这个题用了两个stack，分别是input stack， output stack，不断的将inputstackpop到outputstack里面实现反转，就可以实现queue的功能。
+```cpp
+class  MyQueue {
+
+public:
+
+std::stack<int> sin;
+
+std::stack<int> sout;
+
+MyQueue() {
+
+}
+
+void  push(int  x) {
+
+sin.push(x);
+
+}
+
+int  pop() {
+
+if(sout.empty()){
+
+while(sin.empty() !=true){
+
+sout.push(sin.top());
+
+sin.pop();
+
+}
+
+}
+
+int res = sout.top();
+
+sout.pop();
+
+return res;
+
+}
+
+int  peek() {
+
+int res = this->pop();
+
+sout.push(res);
+
+return res;
+
+}
+
+bool  empty() {
+
+return  sin.empty() && sout.empty();
+
+}
+
+};
+
+  
+
+/**
+
+* Your MyQueue object will be instantiated and called as such:
+
+* MyQueue* obj = new MyQueue();
+
+* obj->push(x);
+
+* int param_2 = obj->pop();
+
+* int param_3 = obj->peek();
+
+* bool param_4 = obj->empty();
+
+*/
+```
+# [232. 用栈实现队列]([https://leetcode.com/problems/reverse-string/]
+有点复杂，但不难，先进行空格的控制，再进行reverse，再对每个单词进行reverse
+```cpp
+class Solution {
+public:
+    void reverseOneWord(int left,int right, string &s) {
+        while(left <right) {
+            char tem = s[left];
+            s[left] = s[right];
+            s[right] = tem;
+            left++;
+            right--;
+        }
+    }
+    string reverseWords(string s) {
+        // find space
+        int right = 0;
+        int left = 0;
+        while(right <s.size()) {
+            while(s[right]==' ' && right <s.size()) {
+                right++;
+            }
+            if(left != 0 && right <s.size()){
+                s[left] = ' ';
+                left++;
+            }
+            while(s[right]!= ' ' && right<s.size()){
+                s[left] = s[right];
+                left++;
+                right++;
+            }
+        }
+        s.resize(left);
+        left = 0;
+        right = s.size() - 1;
+        while(left <right) {
+            char tem = s[left];
+            s[left] = s[right];
+            s[right] = tem;
+            left++;
+            right--;
+        }
+        // reverse the word
+        left = 0;
+        right = 0;
+        for(;right < s.size();right++){
+            if(s[right]== ' '){
+                reverseOneWord(left,right - 1,s);
+                left = right +1;
+            }
+        }
+        reverseOneWord(left,s.size()- 1,s);
+        return s;
+
+    }
+};
+```
+# 卡码网：[55.右旋转字符串](https://kamacoder.com/problempage.php?pid=1065)
+如果不使用额外空间的话，也能做分别对两个部分进行反转，然后再整体反转
 
 **KMP算法**
