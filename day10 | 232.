@@ -140,6 +140,54 @@ return  sin.empty() && sout.empty();
 
 */
 ```
-# [232. 用栈实现队列]([https://leetcode.com/problems/reverse-string/]
+# [225. 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/description/)
+值的注意的是cpp里面queue的top是用q1.front(),stack用的是s.top()
+```cpp
+class MyStack {
+public:
+    std::queue<int> q1;
+    std::queue<int> q2;
+    MyStack() {
 
-**KMP算法**
+    }
+    
+    void push(int x) {
+        q1.push(x);
+    }
+    
+    int pop() {
+        int l = q1.size();
+        for(int i = 0; i < l -1; i++) {
+            q2.push(q1.front());
+            q1.pop();
+        }
+        int result = q1.front();
+        q1.pop();
+        while(!q2.empty()) {
+            q1.push(q2.front());
+            q2.pop();
+        }
+        return result;
+    }
+    
+    int top() {
+       int l = q1.size();
+        for(int i = 0; i < l - 1; i++) {
+            q2.push(q1.front());
+            q1.pop();
+        }
+        int result = q1.front();
+        q1.pop();
+        q2.push(result);
+        while(!q2.empty()) {
+            q1.push(q2.front());
+            q2.pop();
+        }
+        return result;
+    }
+    
+    bool empty() {
+        return q1.empty() &&q2.empty();
+    }
+};
+```
