@@ -1,0 +1,145 @@
+# day10 232. 用栈实现队列 |
+堆（Heap）和栈（Stack）是计算机内存管理中的两种常见区域，它们的使用方式和管理机制有所不同：
+
+1. 栈（Stack）
+内存分配方式：栈是由系统自动分配的内存空间，用于存储函数调用的局部变量、参数、返回地址等。内存的分配和释放由编译器自动管理。
+
+特点：
+快速：因为栈的内存分配是连续的，而且是“后进先出”（LIFO）模式，分配和释放都非常快。
+有序性：栈内存是按调用顺序有序分配和释放的。
+大小有限：栈的大小通常是有限的，因此如果程序使用了过多的局部变量或递归调用层数太深，会导致栈溢出（stack overflow）。
+存储内容：一般用于存储局部变量、函数参数、返回地址等。
+例子：
+
+cpp
+复制代码
+```cpp
+void function() {
+    int x = 10; // x 存储在栈中
+}
+```
+2. 堆（Heap）
+内存分配方式：堆内存的分配是由程序员通过动态分配函数（如 new、malloc 等）进行的，释放也需要程序员手动调用（如 delete、free）。
+
+特点：
+
+灵活性高：堆内存的分配是动态的，程序员可以在运行时自由控制内存的分配和释放。
+不连续性：堆内存的分配是分散的，不一定是连续的，因此分配速度相对较慢，且可能导致内存碎片。
+需要手动管理：如果程序员忘记释放分配的内存，可能会导致内存泄漏（memory leak），长时间运行后会占用大量内存资源。
+例子：
+
+cpp
+复制代码
+```cpp
+void function() {
+    int* p = new int[10]; // p 指向堆中分配的数组
+    delete[] p; // 手动释放堆内存
+}
+```
+总结
+栈适合用于存储生命周期较短、内存需求较小的数据，如局部变量和函数参数。
+堆适合存储生命周期较长、内存需求较大的数据，如动态分配的大型数组或对象。
+两者的主要区别在于内存的管理方式和效率上，栈由系统自动管理，而堆需要程序员手动管理。
+
+
+在计算机科学中，queue 和 stack 的翻译分别是：
+
+Queue：队列
+Stack：栈
+
+详细解释：
+Queue（队列）：
+队列是一种**先进先出（FIFO, First In First Out）**的数据结构，意味着第一个进入队列的元素最先被处理。它就像排队一样，排在前面的人最先服务，后面的人依次服务。
+
+例如：std::queue 在 C++ 标准库中实现了这一结构。
+Stack（栈）：
+栈是一种**后进先出（LIFO, Last In First Out）**的数据结构，意味着最后一个进入栈的元素最先被处理。它类似于一叠盘子，最上面的盘子最先被拿走。
+
+例如：std::stack 在 C++ 标准库中实现了栈结构。
+两者在数据处理中的逻辑顺序不同，适合不同类型的任务。
+队列queue，先进先出
+stack。先进后出
+232. 用栈实现队列
+# [232. 用栈实现队列]([https://leetcode.com/problems/reverse-string/](https://leetcode.cn/problems/implement-queue-using-stacks/description/))
+
+这个题用了两个stack，分别是input stack， output stack，不断的将inputstackpop到outputstack里面实现反转，就可以实现queue的功能。
+```cpp
+class  MyQueue {
+
+public:
+
+std::stack<int> sin;
+
+std::stack<int> sout;
+
+MyQueue() {
+
+}
+
+void  push(int  x) {
+
+sin.push(x);
+
+}
+
+int  pop() {
+
+if(sout.empty()){
+
+while(sin.empty() !=true){
+
+sout.push(sin.top());
+
+sin.pop();
+
+}
+
+}
+
+int res = sout.top();
+
+sout.pop();
+
+return res;
+
+}
+
+int  peek() {
+
+int res = this->pop();
+
+sout.push(res);
+
+return res;
+
+}
+
+bool  empty() {
+
+return  sin.empty() && sout.empty();
+
+}
+
+};
+
+  
+
+/**
+
+* Your MyQueue object will be instantiated and called as such:
+
+* MyQueue* obj = new MyQueue();
+
+* obj->push(x);
+
+* int param_2 = obj->pop();
+
+* int param_3 = obj->peek();
+
+* bool param_4 = obj->empty();
+
+*/
+```
+# [232. 用栈实现队列]([https://leetcode.com/problems/reverse-string/]
+
+**KMP算法**
